@@ -117,6 +117,9 @@ Ejecutamos el contenedor:
  Se nos abre una pagina web: http://localhost:8888/ ; debemos invresar en la carpeta `env` :
 
      New --> Python 3 ( nuevo notebook)
+
+![[imagen1](./imagenes/jupyter_notebook.png)](https://github.com/GermanPLS/NYC-Taxi-Data-Pipeline/blob/79e38102c8cddc7c3641fd0bd9f1b324d3eb64f1/imagenes/jupyter_notebook.png)
+     
 en el notebook escribimos el código para la extracción, transformación y carga en PostgreSQL:
 
 ```sh
@@ -177,7 +180,8 @@ en el notebook escribimos el código para la extracción, transformación y carg
                                   4)  Ver los datos de una tabla
                                       Para ver los datos, haz clic derecho sobre la tabla que quieres consultar y selecciona View/Edit Data → All Rows.
 
-                                      
+   ![[imagen2](./imagenes/pgadmin.png)](https://github.com/GermanPLS/NYC-Taxi-Data-Pipeline/blob/399700ee08d89984397dd6568dda4728e6139d55/imagenes/pgadmin.png)                                 
+![image](https://github.com/user-attachments/assets/75144a93-5c22-4386-8b72-f953a7ac5a25)
 
 ## 7️⃣ Automatización con un script en Python
 Creamos un script llamado pipeline.py para ejecutar todo automáticamente:
