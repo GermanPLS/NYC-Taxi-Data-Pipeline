@@ -201,7 +201,7 @@ Creamos un script llamado pipeline.py para ejecutar todo automáticamente:
 
 Ejecutamos el script:
 
-python pipeline.py
+    python pipeline.py
 
 
 
