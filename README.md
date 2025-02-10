@@ -1,8 +1,10 @@
 # Ingesting NY Taxi Data to Postgres
 
 Este proyecto se basa en el Ejercicio Práctico  °1 del **[Data Engineering Zoomcamp](https://datatalks.club/blog/guide-to-free-online-courses-at-datatalks-club.html#data-engineering-zoomcamp)**
- de DataTalks.Club.
+de DataTalks.Club.
 
+Dataset: http://www1.nyc.gov/site/tlc/about/tlc-trip-record-data.page
+Dictionary: https://www.nyc.gov/assets/tlc/downloads/pdf/data_dictionary_trip_records_yellow.pdf
 
  🚀 Tecnologías utilizadas : 
 
