@@ -4,6 +4,7 @@ Este proyecto se basa en el Ejercicio Práctico  °1 del **[Data Engineering Zoo
 de DataTalks.Club.
 
 Dataset: http://www1.nyc.gov/site/tlc/about/tlc-trip-record-data.page
+
 Dictionary: https://www.nyc.gov/assets/tlc/downloads/pdf/data_dictionary_trip_records_yellow.pdf
 
  🚀 Tecnologías utilizadas : 
@@ -28,9 +29,17 @@ Clonar el repositorio
 
 
 # Paso a Paso 
-
+📂 Estructura del proyecto
 
 ## 1️⃣ Verificación e instalación de herramientas
+
+    NYC-Taxi-Data-Pipeline/
+    │── docker-compose.yml   # Configuración de los contenedores
+    │── requirements.txt     # Dependencias de Python
+    │── notebooks/           # Jupyter Notebooks para el procesamiento de datos
+    │── scripts/             # Scripts Python para la extracción y carga de datos
+    │── data/                # Archivos de datos descargados
+    │── README.md            # Documentación del proyecto
 
   Ejecuta los siguientes comandos en la terminal  para verificar si ya estan instaladas, sino hay que installarlas:
 
@@ -51,10 +60,11 @@ Clonar el repositorio
 
   Creamos la estructura del proyecto (Carpetas) en mi disco, para un mejor rendimiento:
 
-     mkdir proyectos
+    mkdir proyectos
     cd proyectos
     mkdir nyc_taxi_pipeline
     cd nyc_taxi_pipeline
+    mkdir notebooks scripts data
 
 Iniciamos Git:
 
@@ -96,8 +106,18 @@ Iniciamos Git:
 
 Ejecutamos el contenedor:
 
-       docker-compose up -d
+    docker-compose up -d
 
+
+Creamos el archivo requirements.txt :
+
+    pandas
+    numpy
+    sqlalchemy
+    psycopg2-binary
+    jupyter
+    requests
+    pyarrow
 
 ## 4️⃣ Creación del entorno virtual de Python
 
@@ -109,8 +129,9 @@ Ejecutamos el contenedor:
   
    Instalamos las librerías necesarias:  
 
-      pip install pandas pyarrow sqlalchemy psycopg2-binary notebook
-
+      # pip install pandas pyarrow sqlalchemy psycopg2-binary notebook
+        pip install -r requirements.txt
+        
 ## 5️⃣ Desarrollo del script en Jupyter Notebook
 
     jupyter notebook
@@ -186,24 +207,54 @@ en el notebook escribimos el código para la extracción, transformación y carg
 ![image](https://github.com/user-attachments/assets/75144a93-5c22-4386-8b72-f953a7ac5a25)
 
 ## 7️⃣ Automatización con un script en Python
-Creamos un script llamado pipeline.py para ejecutar todo automáticamente:
+Creamos un script en la carpeta scripts/:  `extract_transform_load.py`
 
     import pandas as pd
-    from sqlalchemy import create_engine
-    
-    def main():
-        engine = create_engine("postgresql://admin:admin@localhost:5432/nyc_taxi")
-        url = "https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2024-11.parquet"
+import pyarrow
+import fastparquet
+from sqlalchemy import create_engine
+from sqlalchemy.exc import SQLAlchemyError
+
+def main():
+    url = "https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2024-11.parquet"
+    db_url = "postgresql://admin:admin@localhost:5432/nyc_taxi"
+
+    try:
+        print("Iniciando ejecución del script...")
+        
+        print("Descargando el archivo Parquet...")
+        # Cargar los datos desde la URL
         df = pd.read_parquet(url)
-        df.to_sql("yellow_taxi_data", engine, if_exists="replace", index=False)
-        print("✅ Pipeline completado")
-    
+
+        print(f"Archivo descargado y cargado. Número de filas: {len(df)}")
+
+        if df.empty:
+            print("El DataFrame está vacío. No se insertarán datos.")
+            return
+
+        print("Conectando a la base de datos...")
+        # Crear conexión a la base de datos
+        engine = create_engine(db_url)
+        with engine.connect() as conn:
+            print("Insertando datos en la base de datos...")
+            df.to_sql("yellow_taxi_data", conn, if_exists="replace", index=False)
+
+        print("Pipeline completado")
+
+    except pd.errors.EmptyDataError:
+        print("Error: El archivo Parquet está vacío o no es válido.")
+    except SQLAlchemyError as e:
+        print(f"Error de base de datos: {e}")
+    except Exception as e:
+        print(f"Error inesperado: {e}")
+
     if __name__ == "__main__":
-        main()
+    main()
+
 
 Ejecutamos el script:
 
-    python pipeline.py
+    python scripts/extract_transform_load.py
 
 
 
