@@ -210,14 +210,14 @@ en el notebook escribimos el código para la extracción, transformación y carg
 Creamos un script en la carpeta scripts/:  `extract_transform_load.py`
 
     import pandas as pd
-import pyarrow
-import fastparquet
-from sqlalchemy import create_engine
-from sqlalchemy.exc import SQLAlchemyError
-
-def main():
-    url = "https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2024-11.parquet"
-    db_url = "postgresql://admin:admin@localhost:5432/nyc_taxi"
+    import pyarrow
+    import fastparquet
+    from sqlalchemy import create_engine
+    from sqlalchemy.exc import SQLAlchemyError
+    
+    def main():
+        url = "https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2024-11.parquet"
+        db_url = "postgresql://admin:admin@localhost:5432/nyc_taxi"
 
     try:
         print("Iniciando ejecución del script...")
