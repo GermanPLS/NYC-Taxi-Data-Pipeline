@@ -166,6 +166,9 @@ en el notebook escribimos el código para la extracción, transformación y carg
 
 
 ## 6️⃣ Acceso a pgAdmin
+
+http://localhost:5050
+
     Abre un navegador y accede a `http://localhost:5050` para gestionar la base de datos visualmente.     
 
     Para la configuracion: 
