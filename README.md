@@ -257,6 +257,8 @@ Ejecutamos el script:
     python extract_transform_load.py
 
 
+![image](https://github.com/user-attachments/assets/388296f3-f601-45f0-b0e1-530411a124f0)
+
 
 
 
