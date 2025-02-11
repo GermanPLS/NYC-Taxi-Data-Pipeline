@@ -254,7 +254,7 @@ Creamos un script en la carpeta scripts/:  `extract_transform_load.py`
 
 Ejecutamos el script:
 
-    python scripts/extract_transform_load.py
+    python extract_transform_load.py
 
 
 
