@@ -84,7 +84,7 @@ Iniciamos Git:
         restart: always
         environment:
           POSTGRES_USER: admin
-          POSTGRES_PASSWORD: admin
+          POSTGRES_PASSWORD: xxxx
           POSTGRES_DB: nyc_taxi
         ports:
           - "5432:5432"
@@ -97,7 +97,7 @@ Iniciamos Git:
         restart: always
         environment:
           PGADMIN_DEFAULT_EMAIL: admin@admin.com
-          PGADMIN_DEFAULT_PASSWORD: admin
+          PGADMIN_DEFAULT_PASSWORD: xxxxx
         ports:
           - "5050:80"
     
